@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {}
+    "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {
+    "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
+        "projectUniqueName": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
+        "projectPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\gve\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\obj\\",
+        "outputPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gve\\AppData\\Roaming\\NuGet\\NuGet.Config",

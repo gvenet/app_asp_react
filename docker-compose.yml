@@ -1,0 +1,46 @@
+version: '3'
+services:
+  todo_db: 
+    image: postgres:14.1-alpine
+    env_file:
+      - .env
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=${TODO_DB}
+    ports:
+      - "5432:5432"
+    networks:
+      - vpcbr
+    volumes:
+      - todo_data:/var/lib/postgresql/data
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: "False"
+    ports:
+      - "5050:80"
+    networks:
+      - vpcbr
+    volumes:
+      - ./conf/servers.json:/pgadmin4/servers.json
+      - ./conf/pgpass:/pgadmin4/pgpass
+    depends_on:
+      - "todo_db"
+    entrypoint: >
+      /bin/sh -c " cp -f /pgadmin4/pgpass /var/lib/pgadmin/; chmod 600 /var/lib/pgadmin/pgpass; /entrypoint.sh "
+
+networks:
+  vpcbr:
+    driver: bridge
+
+volumes:
+  todo_data:
+
+

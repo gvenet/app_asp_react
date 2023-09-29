@@ -1,0 +1,14 @@
+{
+   "Servers": {
+      "1": {
+         "Name": "todo_db",
+         "Group": "Servers",
+         "Port": 5432,
+         "Username": "gven",
+         "Host": "todo_db",
+         "SSLMode": "prefer",
+         "MaintenanceDB": "postgres",
+         "PassFile": "/var/lib/pgadmin/pgpass"
+      }
+   }
+}

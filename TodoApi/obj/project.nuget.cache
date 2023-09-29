@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7rPFd3BNXxlvjnIEj25AaZoeJxnZ5RXzFoEq46gwmvCQlvroSoFTjIQlVgAk7fMbZmiTEQTLW9iSrH7TZijvkA==",
+  "dgSpecHash": "gr5M7LbRjY9HkWtxLRZ3ScQkLZMGAVLzOK/JNJY1fQa6+EHIT8g5noJlvPBaRUtU5hMuqA2JuIbSFaVnxelQjA==",
   "success": true,
-  "projectFilePath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
+  "projectFilePath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gve\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\gve\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

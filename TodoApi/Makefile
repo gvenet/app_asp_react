@@ -1,5 +1,5 @@
 run:
-	dotnet run --launch-profile https
+	dotnet run --launch-profile https &
 
 cert:
 	dotnet dev-certs https --trust

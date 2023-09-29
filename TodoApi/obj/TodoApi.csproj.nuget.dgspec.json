@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {}
+    "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj": {}
   },
   "projects": {
-    "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj": {
+    "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
+        "projectUniqueName": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
         "projectName": "TodoApi",
-        "projectPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\TodoApi.csproj",
+        "projectPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
         "packagesPath": "C:\\Users\\gve\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\.net\\TodoApi\\obj\\",
+        "outputPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\gve\\AppData\\Roaming\\NuGet\\NuGet.Config",

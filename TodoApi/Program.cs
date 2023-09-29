@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+
 builder.Services.AddControllers();
 
 builder.Services.AddDbContext<ApiContext>(opt => {
@@ -13,6 +15,15 @@ builder.Services.AddDbContext<ApiContext>(opt => {
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
+builder.Services.AddCors(options => {
+  options.AddPolicy("AllowSpecificOrigin", builder => {
+    builder.WithOrigins("http://localhost:3000")
+           .AllowAnyHeader()
+           .AllowAnyMethod();
+  });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
@@ -21,6 +32,10 @@ if (app.Environment.IsDevelopment()) {
 }
 
 app.UseHttpsRedirection();
+
+app.UseRouting();
+
+app.UseCors("AllowSpecificOrigin");
 
 app.UseAuthorization();
 

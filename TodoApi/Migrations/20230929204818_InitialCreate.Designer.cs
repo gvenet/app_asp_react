@@ -11,7 +11,7 @@ using TodoApi.Models;
 namespace TodoApi.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20230928123136_InitialCreate")]
+    [Migration("20230929204818_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -51,8 +51,8 @@ namespace TodoApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
-                    b.Property<int>("Description")
-                        .HasColumnType("integer");
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<string>("Image_Url")
                         .HasColumnType("text");
@@ -60,8 +60,11 @@ namespace TodoApi.Migrations
                     b.Property<string>("Label")
                         .HasColumnType("text");
 
-                    b.Property<int>("Price")
-                        .HasColumnType("integer");
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<float>("Vesrion")
+                        .HasColumnType("real");
 
                     b.HasKey("Id");
 

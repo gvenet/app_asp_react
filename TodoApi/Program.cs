@@ -29,6 +29,11 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
   app.UseSwagger();
   app.UseSwaggerUI();
+
+  using (var serviceScope = app.Services.CreateScope()) {
+    var services = serviceScope.ServiceProvider;
+    SeedData.Initialize(services);
+  }
 }
 
 app.UseHttpsRedirection();

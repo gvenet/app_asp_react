@@ -1,5 +1,5 @@
 run:
-	dotnet run --launch-profile https &
+	dotnet watch run --launch-profile https
 
 cert:
 	dotnet dev-certs https --trust
@@ -27,13 +27,13 @@ endif
 
 migrate_db:
 ifeq ($(migration),)
-	@echo "Usage: make remove migration=<migration_name>"
+	@echo "Usage: make mirate_db migration=<migration_name>"
 else
-	dotnet ef migrations add $(migration)
+	dotnet ef migrations add $(migration) --no-build
 endif
 
 update_db:
-	dotnet ef database update
+	dotnet ef database update --no-build
 
 init_db:
 	dotnet ef migrations add InitialCreate

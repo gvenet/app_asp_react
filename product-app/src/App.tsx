@@ -1,12 +1,14 @@
 import React from 'react';
 import './statics/css/App.css';
-import Home from './components/Home';
+import RoutesConfig from './routes/Routes';
 
 function App() {
   return (
-      <div className="App">
-        <Home />
-      </div>
+    <div className="App">
+      <main>
+        <RoutesConfig />
+      </main>
+    </div>
     );
 }
 

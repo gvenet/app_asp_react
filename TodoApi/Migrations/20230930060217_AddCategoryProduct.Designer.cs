@@ -11,8 +11,8 @@ using TodoApi.Models;
 namespace TodoApi.Migrations
 {
     [DbContext(typeof(ApiContext))]
-    [Migration("20230929084504_updateProduct2")]
-    partial class updateProduct2
+    [Migration("20230930060217_AddCategoryProduct")]
+    partial class AddCategoryProduct
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,9 @@ namespace TodoApi.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
+                    b.Property<string>("Category")
+                        .HasColumnType("text");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -63,7 +66,7 @@ namespace TodoApi.Migrations
                     b.Property<float>("Price")
                         .HasColumnType("real");
 
-                    b.Property<float>("Vesrion")
+                    b.Property<float>("Version")
                         .HasColumnType("real");
 
                     b.HasKey("Id");
@@ -78,6 +81,9 @@ namespace TodoApi.Migrations
                         .HasColumnType("bigint");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Date")
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsComplete")
                         .HasColumnType("boolean");

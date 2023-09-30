@@ -1,45 +1,53 @@
-// src/components/Home.tsx
 import React, { useEffect, useState } from "react";
-import { login } from "../services/LoginService";
-import { product } from "../services/ProductService";
-
+import { getProduct } from "../services/ProductService";
+import { fetchData } from "../utils/utils";
+import { Product } from "../models/ProductModel";
 
 function Home() {
-  const [loginData, setResponseData] = useState<any>(null);
-  const [productData, setProductData] = useState<any>(null);
+  const [products, setProduct] = useState<Product[]>([]);
 
   useEffect(() => {
-    login()
-      .then((login) => {
-        setResponseData(login.data);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la requête:", error);
-      });
+    fetchData(getProduct, setProduct);
   }, []);
 
-  useEffect(() => {
-    product()
-      .then((product) => {
-        setProductData(product.data);
-      })
-      .catch((error) => {
-        console.error("Erreur lors de la requête:", error);
-      });
-  }, []);
+  const renderTable = () => {
+    if (products.length === 0) {
+      return <p>Chargement en cours...</p>;
+    }
+
+    return (
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Label</th>
+            <th>Prix</th>
+            <th>Description</th>
+            <th>Image URL</th>
+            <th>Version</th>
+            <th>Catégorie</th>
+          </tr>
+        </thead>
+        <tbody>
+          {products.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.label || "-"}</td>
+              <td>{product.price || "-"}</td>
+              <td>{product.description || "-"}</td>
+              <td>{product.image_Url || "-"}</td>
+              <td>{product.version || "-"}</td>
+              <td>{product.category || "-"}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
+  };
 
   return (
     <div>
-      <h1>Mon Composant</h1>
-      {/* Afficher les données de la réponse si elles existent */}
-      {loginData && (
-        <div>
-          <h2>Données de la réponse :</h2>
-          {/* <pre>{JSON.stringify(loginData, null, 2)}</pre> */}
-          <pre>{JSON.stringify(productData, null, 2)}</pre>
-        </div>
-      )}
-      {/* Contenu de votre composant */}
+      <div>{renderTable()}</div>
     </div>
   );
 }

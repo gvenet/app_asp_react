@@ -32,9 +32,10 @@ namespace TodoApi.Migrations
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Label = table.Column<string>(type: "text", nullable: true),
-                    Price = table.Column<int>(type: "integer", nullable: false),
-                    Description = table.Column<int>(type: "integer", nullable: false),
-                    ImageUrl = table.Column<string>(name: "Image_Url", type: "text", nullable: true)
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ImageUrl = table.Column<string>(name: "Image_Url", type: "text", nullable: true),
+                    Vesrion = table.Column<float>(type: "real", nullable: false)
                 },
                 constraints: table =>
                 {

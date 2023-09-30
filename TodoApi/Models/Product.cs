@@ -7,5 +7,6 @@ public class Product
     public float Price { get; set; }
     public string? Description { get; set; }
     public string? Image_Url { get; set; }
-    public float Vesrion { get; set; }
+    public float Version { get; set; }
+    public string? Category { get; set; }
 }

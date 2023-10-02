@@ -29,11 +29,11 @@ migrate_db:
 ifeq ($(migration),)
 	@echo "Usage: make mirate_db migration=<migration_name>"
 else
-	dotnet ef migrations add $(migration) --no-build
+	dotnet ef migrations add $(migration)
 endif
 
 update_db:
-	dotnet ef database update --no-build
+	dotnet ef database update
 
 init_db:
 	dotnet ef migrations add InitialCreate

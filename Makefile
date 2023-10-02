@@ -2,13 +2,6 @@ SUBDIRS := product-app TodoApi
 
 .PHONY: all
 
-run:
-	@for dir in $(SUBDIRS); do \
-		echo "Entering directory $$dir"; \
-		$(MAKE) -C $$dir run; \
-		echo "Leaving directory $$dir"; \
-	done
-
 re: down build start
 
 rc: down clean build start

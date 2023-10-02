@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -23,21 +24,24 @@ namespace TodoApi.Controllers {
         [FromQuery] string? category,
         [FromQuery] float minPrice,
         [FromQuery] float maxPrice,
-        [FromQuery] int page = 1, 
-        [FromQuery] int pageSize = 10 
+        [FromQuery] int page = 1,
+        [FromQuery] int pageSize = 10
     ) {
-      var query = _context.Products.AsQueryable();
+      var query = _context.Products.Include(p => p.Category).AsQueryable();
 
       if (!string.IsNullOrEmpty(category)) {
-        query = query.Where(p => p.Category == category);
+        query = query.Where(p => p.Category.Label == category);
       }
 
-      if (minPrice > 0 && maxPrice > 0) {
-        query = query.Where(p => p.Price >= minPrice && p.Price <= maxPrice);
+      if (minPrice > 0) {
+        query = query.Where(p => p.Price >= minPrice);
+      }
+
+      if (maxPrice > 0) {
+        query = query.Where(p => p.Price <= maxPrice);
       }
 
       int totalItems = await query.CountAsync();
-
       int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
       if (page < 1 || page > totalPages) {
@@ -45,16 +49,18 @@ namespace TodoApi.Controllers {
       }
 
       int startIndex = (page - 1) * pageSize;
-
       query = query.Skip(startIndex).Take(pageSize);
 
+      Response.Headers.Add("X-Total-Pages", totalPages.ToString());
+      
+      
+      
       var products = await query.ToListAsync();
 
       if (products == null) {
         return NotFound();
       }
 
-      Response.Headers.Add("X-Total-Pages", totalPages.ToString());
 
       return products;
     }

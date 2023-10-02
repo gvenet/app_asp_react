@@ -3919,7 +3919,7 @@
           }
         }
       },
-      "System.Text.Json/7.0.0": {
+      "System.Text.Json/7.0.3": {
         "type": "package",
         "dependencies": {
           "System.Text.Encodings.Web": "7.0.0"
@@ -10563,10 +10563,10 @@
         "useSharedDesignerContext.txt"
       ]
     },
-    "System.Text.Json/7.0.0": {
-      "sha512": "DaGSsVqKsn/ia6RG8frjwmJonfos0srquhw09TlT8KRw5I43E+4gs+/bZj4K0vShJ5H9imCuXupb4RmS+dBy3w==",
+    "System.Text.Json/7.0.3": {
+      "sha512": "AyjhwXN1zTFeIibHimfJn6eAsZ7rTBib79JQpzg8WAuR/HKDu9JGNHTuu3nbbXQ/bgI+U4z6HtZmCHNXB1QXrQ==",
       "type": "package",
-      "path": "system.text.json/7.0.0",
+      "path": "system.text.json/7.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -10629,7 +10629,7 @@
         "lib/net7.0/System.Text.Json.xml",
         "lib/netstandard2.0/System.Text.Json.dll",
         "lib/netstandard2.0/System.Text.Json.xml",
-        "system.text.json.7.0.0.nupkg.sha512",
+        "system.text.json.7.0.3.nupkg.sha512",
         "system.text.json.nuspec",
         "useSharedDesignerContext.txt"
       ]
@@ -10869,7 +10869,8 @@
       "Microsoft.EntityFrameworkCore.Tools.DotNet >= 2.0.3",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 7.0.0",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.11",
-      "Swashbuckle.AspNetCore >= 6.5.0"
+      "Swashbuckle.AspNetCore >= 6.5.0",
+      "System.Text.Json >= 7.0.3"
     ]
   },
   "packageFolders": {
@@ -10878,11 +10879,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
+      "projectUniqueName": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
       "projectName": "TodoApi",
-      "projectPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
+      "projectPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\TodoApi.csproj",
       "packagesPath": "C:\\Users\\gve\\.nuget\\packages\\",
-      "outputPath": "c:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\obj\\",
+      "outputPath": "C:\\Users\\gve\\OneDrive - SEPTEO\\Documents\\app_asp_react\\TodoApi\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\gve\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10948,6 +10949,10 @@
           "Swashbuckle.AspNetCore": {
             "target": "Package",
             "version": "[6.5.0, )"
+          },
+          "System.Text.Json": {
+            "target": "Package",
+            "version": "[7.0.3, )"
           }
         },
         "imports": [

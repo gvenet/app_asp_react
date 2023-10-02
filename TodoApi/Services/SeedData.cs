@@ -14,29 +14,38 @@ namespace TodoApi.Models {
           return;
         }
 
-        string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
+        string alphabet = "ABCDEFGHIJ";
+
         Random random = new Random();
-        
-        for (int i = 0; i < 100; i++) {
-          char selectedLetter1 = alphabet[random.Next(alphabet.Length)];
-          string selectedLabel = $"Produit {selectedLetter1}";
-          
-          char selectedLetter2 = alphabet[random.Next(alphabet.Length)];
-          string category = $"Catégorie {selectedLetter2}";
+        List<Category> categories = new List<Category>();
+        for (int i = 0; i < 10; i++) {
+          var category = new Category {
+            Label = alphabet[i].ToString()
+          };
+          categories.Add(category);
+          context.Categories.Add(category);
+        }
+        context.SaveChanges();
+
+        var products = new List<Product>();
+        for (int i = 1; i <= 100; i++) {
+          int randomIndex = random.Next(0, alphabet.Length);
+          var category = categories.FirstOrDefault(c => c.Label == alphabet[randomIndex].ToString());
+
+          if (category == null) {
+            Console.WriteLine($"Category is null for Product {i}, Index : {randomIndex}");
+          }
 
           var product = new Product {
-            Label = selectedLabel,
-            Price = (float)Math.Round(random.NextDouble() * (100 - 1) + 1,2),
-            Description = $"Description du {selectedLabel}",
-            Image_Url = $"url_image_{i + 1}",
-            Version = (float)Math.Round(random.NextDouble() * (5 - 1) + 1,2),
-            Category = category
+            Label = $"Product {i}",
+            Price = (float)random.NextDouble() * 100,
+            Description = $"Description for Product {i}",
+            Image_Url = $"ImageUrl{i}",
+            Category = category!
           };
-
-          context.Products.Add(product);
+          products.Add(product);
         }
-
+        context.Products.AddRange(products);
         context.SaveChanges();
       }
     }

@@ -15,13 +15,14 @@ namespace TodoApi.Controllers {
     // GET: api/Category
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Category>>> GetCategories() {
-      var categories = await _context.Categories
-          .Include(category => category.Products) // Inclure les produits associés
-          .ToListAsync();
-
-      if (categories == null) {
+      if (_context.Categories == null) {
         return NotFound();
       }
+
+      var categories = await _context.Categories
+          .Include(c => c.ProductCategories)
+          .ThenInclude(pc => pc.Product)
+          .ToListAsync();
 
       return categories;
     }

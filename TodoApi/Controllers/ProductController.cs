@@ -18,7 +18,6 @@ namespace TodoApi.Controllers {
       _context = context;
     }
 
-    // GET: api/Product
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProduct(
         [FromQuery] string? category,
@@ -27,10 +26,17 @@ namespace TodoApi.Controllers {
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10
     ) {
-      var query = _context.Products.Include(p => p.Category).AsQueryable();
+      float maxProductPrice = await _context.Products.MaxAsync(p => p.Price);
+
+      var query = _context.Products.AsQueryable();
 
       if (!string.IsNullOrEmpty(category)) {
-        query = query.Where(p => p.Category.Label == category);
+        query = query
+            .Where(p => p.ProductCategories.Any(pc => pc.Category!.Label == category));
+      }
+
+      if (minPrice > maxPrice ) {
+        return Ok(new List<object>());
       }
 
       if (minPrice > 0) {
@@ -45,41 +51,66 @@ namespace TodoApi.Controllers {
       int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
       if (page < 1 || page > totalPages) {
-        return BadRequest("Page invalide");
+        page = totalPages;
+        // return BadRequest("Page invalide");
       }
 
       int startIndex = (page - 1) * pageSize;
-      query = query.Skip(startIndex).Take(pageSize);
+
+      var products = await query
+          .Skip(startIndex)
+          .Take(pageSize)
+          .Include(p => p.ProductCategories)
+          .ThenInclude(pc => pc.Category)
+          .ToListAsync();
+
+      if (products == null || products.Count == 0) {
+        return Ok(new List<object>());
+      }
 
       Response.Headers.Add("X-Total-Pages", totalPages.ToString());
-      
-      
-      
-      var products = await query.ToListAsync();
 
-      if (products == null) {
-        return NotFound();
-      }
+      Response.Headers.Add("X-Max-Price", maxProductPrice.ToString());
 
+      Response.Headers.Add("X-Current-Page", page.ToString());
 
-      return products;
+      var productsWithCategories = products.Select(p => new {
+        p.Id,
+        p.Label,
+        p.Price,
+        p.Description,
+        p.Image_Url,
+        p.Version,
+        Categories = p.ProductCategories.Select(pc => pc.Category!.Label).ToList()
+      });
+
+      return Ok(productsWithCategories);
     }
 
-
-    // GET: api/Product/5
     [HttpGet("{id}")]
     public async Task<ActionResult<Product>> GetProduct(long id) {
-      if (_context.Products == null) {
-        return NotFound();
-      }
-      var product = await _context.Products.FindAsync(id);
+      var product = await _context.Products
+          .Include(p => p.ProductCategories)
+          .ThenInclude(pc => pc.Category)
+          .FirstOrDefaultAsync(p => p.Id == id);
 
       if (product == null) {
         return NotFound();
       }
 
-      return product;
+      var productWithCategories = new {
+        product.Id,
+        product.Label,
+        product.Price,
+        product.Description,
+        product.Image_Url,
+        product.Version,
+        Categories = product.ProductCategories.Select(pc => pc.Category!.Label).ToList()
+      };
+
+      return Ok(productWithCategories);
     }
+
 
     // PUT: api/Product/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

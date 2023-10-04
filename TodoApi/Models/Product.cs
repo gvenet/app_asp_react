@@ -10,10 +10,7 @@ public class Product {
   public string? Image_Url { get; set; }
   public float Version { get; set; }
 
-  public long CategoryId { get; set; }
-  
   [JsonIgnore]
-  public Category Category { get; set; } = null!;
-
+  public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
 
 }

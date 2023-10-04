@@ -10,13 +10,21 @@ public class ApiContext : DbContext {
   public DbSet<Login> Logins { get; set; } = null!;
   public DbSet<Product> Products { get; set; } = null!;
   public DbSet<Category> Categories { get; set; } = null!;
+  public DbSet<ProductCategory> ProductsCategories { get; set; } = null!;
 
-  protected override void OnModelCreating(ModelBuilder modelBuilder) {
-    // Configuration de la relation one-to-many entre Category et Product
-    modelBuilder.Entity<Category>()
-        .HasMany(category => category.Products)
-        .WithOne(product => product.Category)
-        .HasForeignKey(product => product.CategoryId)
-        .IsRequired();
-  }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<ProductCategory>()
+        .HasKey(pc => new { pc.ProductId, pc.CategoryId });
+
+    modelBuilder.Entity<ProductCategory>()
+        .HasOne(pc => pc.Product)
+        .WithMany(p => p.ProductCategories)
+        .HasForeignKey(pc => pc.ProductId);
+
+    modelBuilder.Entity<ProductCategory>()
+        .HasOne(pc => pc.Category)
+        .WithMany(c => c.ProductCategories)
+        .HasForeignKey(pc => pc.CategoryId);
+}
 }

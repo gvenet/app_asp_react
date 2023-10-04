@@ -8,4 +8,5 @@ export interface Product {
   image_Url?: string | null;
   version: number;
   category?: string | null;
+  categories?: string[]
 }

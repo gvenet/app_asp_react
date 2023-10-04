@@ -21,21 +21,30 @@ namespace TodoApi.Controllers {
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Product>>> GetProduct(
         [FromQuery] string? category,
+        [FromQuery] string? brand,
         [FromQuery] float minPrice,
         [FromQuery] float maxPrice,
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10
     ) {
+      if (page == 0) {
+        page = 1;
+      }
+
       float maxProductPrice = await _context.Products.MaxAsync(p => p.Price);
 
       var query = _context.Products.AsQueryable();
+
+      if (!string.IsNullOrEmpty(brand)) {
+        query = query.Where(b => b.Brand!.Label == brand);
+      }
 
       if (!string.IsNullOrEmpty(category)) {
         query = query
             .Where(p => p.ProductCategories.Any(pc => pc.Category!.Label == category));
       }
 
-      if (minPrice > maxPrice ) {
+      if (minPrice > maxPrice) {
         return Ok(new List<object>());
       }
 
@@ -48,11 +57,19 @@ namespace TodoApi.Controllers {
       }
 
       int totalItems = await query.CountAsync();
+
+      if (totalItems == 0) {
+        return Ok(new List<object>());
+      }
+
       int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
 
-      if (page < 1 || page > totalPages) {
+      if (page > totalPages) {
         page = totalPages;
-        // return BadRequest("Page invalide");
+      }
+      
+      if (page < 1) {
+        return Ok(new List<object>());
       }
 
       int startIndex = (page - 1) * pageSize;
@@ -62,6 +79,7 @@ namespace TodoApi.Controllers {
           .Take(pageSize)
           .Include(p => p.ProductCategories)
           .ThenInclude(pc => pc.Category)
+          .Include(p => p.Brand)
           .ToListAsync();
 
       if (products == null || products.Count == 0) {
@@ -81,6 +99,7 @@ namespace TodoApi.Controllers {
         p.Description,
         p.Image_Url,
         p.Version,
+        p.Brand,
         Categories = p.ProductCategories.Select(pc => pc.Category!.Label).ToList()
       });
 

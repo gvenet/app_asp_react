@@ -9,6 +9,9 @@ public class Product {
   public string? Description { get; set; }
   public string? Image_Url { get; set; }
   public float Version { get; set; }
+  public long BrandId { get; set; }
+  
+  public Brand Brand { get; set; } = null!;
 
   [JsonIgnore]
   public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();

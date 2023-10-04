@@ -27,14 +27,31 @@ namespace TodoApi.Models {
         }
         context.SaveChanges();
 
+        List<string> brandsValues = new List<string> { "Nike", "Adidas Originals", "Puma", "The North Face", "Reebok", "Carhartt", "Columbia", "Supreme", "Stüssy", "A-Cold-Wall" };
+
+        List<Brand> brands = new List<Brand>();
+        for (int i = 0; i < 10; i++) {
+          var brand = new Brand {
+            Label = brandsValues[i]
+          };
+          brands.Add(brand);
+          context.Brands.Add(brand);
+        }
+        context.SaveChanges();
+
         var products = new List<Product>();
         for (int i = 1; i <= 100; i++) {
+          int randomBrandIndex = random.Next(0, brandsValues.Count);
+          string randomBrandLabel = brandsValues[randomBrandIndex];
+
+          var brand = context.Brands.FirstOrDefault(b => b.Label == randomBrandLabel);
           var product = new Product {
             Label = $"Product {i}",
-            Price = (float)random.NextDouble() * 100,
+            Price = (float)Math.Round(random.NextDouble() * 100, 2),
             Description = $"Description for Product {i}",
             Image_Url = $"ImageUrl{i}",
-            Version = 1.0f
+            Version = 1.0f,
+            BrandId = brand!.Id
           };
           products.Add(product);
         }

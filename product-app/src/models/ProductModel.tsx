@@ -1,5 +1,7 @@
 // ProductModel.ts
 
+import { Brand } from "./BrandModel";
+
 export interface Product {
   id: number;
   label?: string | null;
@@ -8,5 +10,6 @@ export interface Product {
   image_Url?: string | null;
   version: number;
   category?: string | null;
-  categories?: string[]
+  categories?: string[];
+  brand?: Brand;
 }

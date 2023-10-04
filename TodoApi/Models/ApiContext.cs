@@ -11,6 +11,7 @@ public class ApiContext : DbContext {
   public DbSet<Product> Products { get; set; } = null!;
   public DbSet<Category> Categories { get; set; } = null!;
   public DbSet<ProductCategory> ProductsCategories { get; set; } = null!;
+  public DbSet<Brand> Brands { get; set; } = null!;
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
 {

@@ -6,7 +6,7 @@ function App() {
   const [max, setMax] = useState(0);
 
   useEffect(() => {
-    getProduct("", 0, 0, 1, 10)
+    getProduct("", "", 0, 0, 1, 10)
       .then((response) => {
         console.log("getProduct");
         setMax(parseInt(response.headers["x-max-price"]));

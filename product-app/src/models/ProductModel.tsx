@@ -12,4 +12,5 @@ export interface Product {
   category?: string | null;
   categories?: string[];
   brand?: Brand;
+  [key: string]: any;
 }

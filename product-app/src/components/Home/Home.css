@@ -1,65 +1,47 @@
+.header {
+  display: flex;
+  width: 100vw;
+  justify-content:space-around;
+  align-items: center;
+  border-bottom: 2px solid #1e88e5;
+  margin: 0 0 40px;
+}
+
+.radio-group {
+  width: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.radio {
+  display: flex;
+  flex-direction: column;
+}
 
 .container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: #f2f2f2;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-}
-
-.label {
-  margin-bottom: 5px;
-  color: #009900;
-}
-
-.input {
-  width: 200px;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #009900;
-  border-radius: 5px;
-}
-
-.button-container {
-  display: flex;
+  justify-content:space-around;
   align-items: center;
-  margin-top: 15px;
-}
-
-.button {
-  padding: 10px 20px;
-  margin: 0 10px;
-  cursor: pointer;
-  background-color: #009900;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  transition: background-color 0.3s ease;
-}
-
-.button:hover {
-  background-color: #007700;
+  flex-direction: column;
 }
 
 .table-container {
-  margin-top: 20px;
+  border: 2px solid #1e88e5;
+  border-radius: 10px;
 }
 
-table {
-  border-collapse: collapse;
-  width: 100%;
+.table-container thead th {
+  color: #1e88e5;
+  padding: 15px;
+  cursor: pointer;
 }
 
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: left;
+.table-container tbody tr td {
+  border-top: 2px solid #1e88e5;
+  padding: 15px;
 }
 
-th {
-  background-color: #009900;
-  color: #fff;
+.select-component {
+  min-width: 250px;
 }

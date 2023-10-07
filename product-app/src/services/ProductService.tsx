@@ -6,7 +6,9 @@ const BASE_URL = "https://localhost:7097/api";
 
 // Fonction pour effectuer un appel HTTP GET vers /api/Login
 export const getProduct = async (
-  category?: string,
+  sortColumn?: string,
+  sortOrder?: string,
+  categories?: string,
   brand?: string,
   minPrice?: number,
   maxPrice?: number,
@@ -14,9 +16,12 @@ export const getProduct = async (
   pageSize?: number
 ): Promise<AxiosResponse<any>> => {
   try {
+    // console.log(sortColumn + " " + sortOrder);
     const response = await axios.get(`${BASE_URL}/Product`, {
       params: {
-        category,
+        sortColumn,
+        sortOrder,
+        categories,
         brand,
         minPrice,
         maxPrice,

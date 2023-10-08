@@ -1,0 +1,16 @@
+.new-product-container {
+  padding: 50px;
+  height: 100%;
+}
+
+.new-product-form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+}
+
+.submit-form-product {
+  margin-bottom: 10px;
+}

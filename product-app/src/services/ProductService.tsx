@@ -34,3 +34,14 @@ export const getProduct = async (
     throw error;
   }
 };
+
+export const postProduct = async (
+  productData: any 
+): Promise<AxiosResponse<any>> => {
+  try {
+    const response = await axios.post(`${BASE_URL}/Product`, productData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

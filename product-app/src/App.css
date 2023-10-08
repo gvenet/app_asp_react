@@ -28,6 +28,17 @@
   color: #61dafb;
 }
 
+.main {
+  display: flex;
+  width: 100vw;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -37,37 +48,5 @@
   }
 }
 
-.aws-btn {
-  --button-default-height: 44px;
-  --button-default-font-size: 14px;
-  --button-default-border-radius: 4px;
-  --button-horizontal-padding: 16px;
-  --button-raise-level: 4px;
-  --button-hover-pressure: 1;
-  --transform-speed: 0.15s;
-  --button-primary-color: #32a934;
-  --button-primary-color-dark: #228d20;
-  --button-primary-color-light: #ffffff;
-  --button-primary-color-hover: #20bc22;
-  --button-primary-color-active: #169414;
-  --button-primary-border: 4px solid transparent;
-  --button-secondary-color: #f2f6f9;
-  --button-secondary-color-dark: #1360a4;
-  --button-secondary-color-light: #1e88e5;
-  --button-secondary-color-hover: #e1eaf1;
-  --button-secondary-color-active: #cfdee9;
-  --button-secondary-border: 2px solid #1e88e5;
-  --button-anchor-color: #0e4f88;
-  --button-anchor-color-dark: #072743;
-  --button-anchor-color-light: #ffffff;
-  --button-anchor-color-hover: #0d4a7f;
-  --button-anchor-color-active: #0c4271;
-  --button-anchor-border: none;
-  --button-danger-color: #c42e2e;
-  --button-danger-color-dark: #861f1f;
-  --button-danger-color-light: #ffffff;
-  --button-danger-color-hover: #bc2c2c;
-  --button-danger-color-active: #af2929;
-  --button-danger-border: none;
-}
+
 

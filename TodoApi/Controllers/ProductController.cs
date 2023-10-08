@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Logging;
 using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 
@@ -223,15 +224,59 @@ namespace TodoApi.Controllers {
     // POST: api/Product
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost]
-    public async Task<ActionResult<Product>> PostProduct(Product product) {
+    public async Task<ActionResult<Product>> PostProduct(ProductViewModel productViewModel) {
       if (_context.Products == null) {
-        return Problem("Entity set 'Context.Product'  is null.");
+        return Problem("Entity set 'Context.Product' is null.");
       }
+
+      var product = new Product {
+        Label = productViewModel.Label,
+        Price = productViewModel.Price,
+        Description = productViewModel.Description,
+        Image_Url = productViewModel.Image_Url,
+        Version = productViewModel.Version,
+      };
+
+
+      var brand = await _context.Brands
+          .FirstOrDefaultAsync(b => b.Label == productViewModel.BrandLabel);
+
+      if (brand == null) {
+        return BadRequest("La marque spécifiée n'existe pas.");
+      }
+
+      product.BrandId = brand.Id;
+      
       _context.Products.Add(product);
+      await _context.SaveChangesAsync();
+
+      Console.WriteLine(product.Id);
+
+      var categoryIds = new List<long>();
+
+      foreach (var categoryLabel in productViewModel.Categories) {
+        var category = await _context.Categories
+            .FirstOrDefaultAsync(c => c.Label == categoryLabel);
+
+        if (category != null) {
+          categoryIds.Add(category.Id);
+        }
+        else {
+        }
+      }
+
+      var productCategories = categoryIds.Select(categoryId => new ProductCategory {
+        ProductId = product.Id,
+        CategoryId = categoryId
+      }).ToList();
+
+      _context.ProductsCategories.AddRange(productCategories);
+
       await _context.SaveChangesAsync();
 
       return CreatedAtAction("GetProduct", new { id = product.Id }, product);
     }
+
 
     // DELETE: api/Product/5
     [HttpDelete("{id}")]
